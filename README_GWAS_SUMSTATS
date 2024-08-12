@@ -1,0 +1,55 @@
+# BMI GWAS Results
+
+This repository contains the results of Genome-Wide Association Studies (GWAS) for Body Mass Index (BMI) across different age brackets and sexes.
+
+## File Description
+
+The compressed files contain GWAS results for BMI, separated by sex and age brackets. Each file follows this naming convention:
+
+- `ln_bmi_t6_[sex]_[age_bracket]_beta.gz`
+
+Where:
+- `[sex]` is either `female` or `male`
+- `[age_bracket]` is one of `a`, `b`, `c`, `d`, `e`, or `f`
+
+The age brackets correspond to the following age ranges:
+
+- a: 40-45 years
+- b: 46-50 years
+- c: 51-55 years
+- d: 56-60 years
+- e: 61-65 years
+- f: 66-73 years
+
+## File Content
+
+Each file contains the following columns:
+
+1. SNP: The rsID of the SNP
+2. A1: The effect allele
+3. A2: The non-effect allele
+4. OR: The odds ratio (effect size)
+5. P: The p-value of the association
+
+## How to Use
+
+1. Unzip the files using a tool like gunzip:
+   ```
+   gunzip ln_bmi_t6_female_a_beta.gz
+   ```
+
+2. You can then read the file using your preferred data analysis tool. For example, in R:
+   ```R
+   data <- read.table("ln_bmi_t6_female_a_beta", header = TRUE)
+   ```
+
+3. Note that the p-values in the files are -log10 transformed. To get the actual p-value, you need to perform this transformation:
+   ```R
+   data$P <- 10^(-data$P)
+   ```
+
+## Additional Information
+
+- The GWAS was performed using 40 principal components for population stratification control.
+- The data is from the UK Biobank (Application 23704).
+- For any questions or issues, please open an issue in this repository.
