@@ -4,16 +4,12 @@ This repository contains the results of Genome-Wide Association Studies (GWAS) f
 
 ## File Description
 
-All GWAS results are compressed into a single file:
+This repository contains 12 individual compressed GWAS result files for BMI, separated by sex and age brackets. Each file follows this naming convention:
 
-- `compressed_files.zip`
-
-This zip file contains individual GWAS result files for BMI, separated by sex and age brackets. Each file within the zip follows this naming convention:
-
-- `ln_bmi_t6_[sex]_[age_bracket]_beta`
+- `bmi_[age_bracket]_[sex].sumstats.gz`
 
 Where:
-- `[sex]` is either `female` or `male`
+- `[sex]` is either `f` (female) or `m` (male)
 - `[age_bracket]` is one of `a`, `b`, `c`, `d`, `e`, or `f`
 
 The age brackets correspond to the following age ranges:
@@ -25,9 +21,17 @@ The age brackets correspond to the following age ranges:
 - e: 61-65 years
 - f: 66-73 years
 
+## File Sizes
+
+The individual .gz files can be quite large. For example:
+
+- `bmi_b_f.sumstats.gz` is approximately 15MB in size.
+
+Other files may vary in size, but users should expect files in the range of 10-20MB each.
+
 ## File Content
 
-Each file within the zip contains the following columns:
+Each .gz file contains the following columns:
 
 1. SNP: The rsID of the SNP
 2. A1: The effect allele
@@ -37,23 +41,40 @@ Each file within the zip contains the following columns:
 
 ## How to Use
 
-1. First, unzip the compressed_files.zip:
+1. Download the .gz file(s) you're interested in.
+
+2. Unzip each .gz file:
    ```
-   unzip compressed_files.zip
+   gunzip bmi_b_f.sumstats.gz
    ```
 
-2. This will extract all the individual GWAS result files. You can then read each file using your preferred data analysis tool. For example, in R:
+3. Now you can read each file using your preferred data analysis tool. For example, in R:
    ```R
-   data <- read.table("ln_bmi_t6_female_a_beta", header = TRUE)
+   data <- read.table("bmi_b_f.sumstats", header = TRUE)
    ```
 
-3. Note that the p-values in the files are -log10 transformed. To get the actual p-value, you need to perform this transformation:
+4. Note that the p-values in the files are -log10 transformed. To get the actual p-value, you need to perform this transformation:
    ```R
    data$P <- 10^(-data$P)
    ```
+
+## Checking File Sizes
+
+To check the size of any of the .gz files, you can use the following Unix command:
+
+```
+ls -lh filename.gz
+```
+
+Or for more detailed information:
+
+```
+du -h filename.gz
+```
 
 ## Additional Information
 
 - The GWAS was performed using 40 principal components for population stratification control.
 - The data is from the UK Biobank (Application 23704).
+- Due to the large file sizes, ensure you have sufficient disk space before extracting the files.
 - For any questions or issues, please open an issue in this repository.
