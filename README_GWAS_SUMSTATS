@@ -4,9 +4,13 @@ This repository contains the results of Genome-Wide Association Studies (GWAS) f
 
 ## File Description
 
-The compressed files contain GWAS results for BMI, separated by sex and age brackets. Each file follows this naming convention:
+All GWAS results are compressed into a single file:
 
-- `ln_bmi_t6_[sex]_[age_bracket]_beta.gz`
+- `compressed_files.zip`
+
+This zip file contains individual GWAS result files for BMI, separated by sex and age brackets. Each file within the zip follows this naming convention:
+
+- `ln_bmi_t6_[sex]_[age_bracket]_beta`
 
 Where:
 - `[sex]` is either `female` or `male`
@@ -23,7 +27,7 @@ The age brackets correspond to the following age ranges:
 
 ## File Content
 
-Each file contains the following columns:
+Each file within the zip contains the following columns:
 
 1. SNP: The rsID of the SNP
 2. A1: The effect allele
@@ -33,12 +37,12 @@ Each file contains the following columns:
 
 ## How to Use
 
-1. Unzip the files using a tool like gunzip:
+1. First, unzip the compressed_files.zip:
    ```
-   gunzip ln_bmi_t6_female_a_beta.gz
+   unzip compressed_files.zip
    ```
 
-2. You can then read the file using your preferred data analysis tool. For example, in R:
+2. This will extract all the individual GWAS result files. You can then read each file using your preferred data analysis tool. For example, in R:
    ```R
    data <- read.table("ln_bmi_t6_female_a_beta", header = TRUE)
    ```
